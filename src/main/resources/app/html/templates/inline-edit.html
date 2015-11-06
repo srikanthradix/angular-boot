@@ -1,0 +1,8 @@
+<div>
+    <input type="text" ng-model="editCtrl.model" ng-show="editCtrl.editMode">
+    <button ng-click="editCtrl.cancel()" ng-show="editCtrl.editMode" class="glyphicon glyphicon-remove"></button>
+    <button ng-click="editCtrl.save()" ng-show="editCtrl.editMode" class="glyphicon glyphicon-ok"></button>
+  <span ng-mouseenter="editCtrl.showEdit = true" ng-mouseleave="editCtrl.showEdit = false">
+    <span ng-hide="editCtrl.editMode" ng-click="editCtrl.edit()">{{editCtrl.model}}</span>
+  </span>
+</div>

@@ -1,0 +1,35 @@
+{
+  "name": "angular-spring-boot",
+  "description": "An example project which demonstrates how to use angular with spring-boot",
+  "main": "index.html",
+  "authors": [
+    "Srikanth Vuppula"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angularjs",
+    "angular",
+    "angular-springboot"
+  ],
+  "homepage": "https://github.com/srikanthradix/angular-require-boot",
+  "moduleType": [
+    "amd"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-resource": "~1.4.6",
+    "angular-ui-router": "~0.2.15",
+    "angular-loader": "~1.4.7",
+    "angularUtils-pagination": "angular-utils-pagination#~0.9.1",
+    "angular-bootstrap": "~0.14.3",
+    "html5-boilerplate": "~5.2.0"
+  }
+}

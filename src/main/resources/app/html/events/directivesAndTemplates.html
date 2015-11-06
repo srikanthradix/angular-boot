@@ -1,0 +1,52 @@
+<p>This is the partial for view 1.</p>
+<p>Name: <input type="text" ng-model="name"></p>
+<p ng-bind="name"></p>
+
+<div ng-init="friends = [{name: 'John', phone: '555-111-111'},
+                {name: 'Mary', phone: '555-111-112'},
+                {name: 'Susan', phone: '555-111-113'},
+                {name: 'Connor', phone: '555-111-114'},
+                {name: 'Yoo', phone: '555-111-115'},
+                {name: 'Jie', phone: '555-111-116'},
+                {name: 'Ginger', phone: '555-111-117'},]">
+</div>
+
+<div mouse-events-directive>Enter/Exit here</div>
+
+<br/><br/>
+
+<div>
+
+    <form>
+        <script type="text/ng-template" id="repeatTreeData">
+            <button ng-click="datC.expandCollapse(data)" ng-show="data.show && data.nodes.length > 0">-</button>
+            <button ng-click="datC.expandCollapse(data)" ng-show="!data.show && data.nodes.length > 0">+</button>
+
+            <edit-in-place-dir value="data">
+                {{data.name}}
+            </edit-in-place-dir>
+
+            <button ng-click="datC.addNode(data)">Add Node</button>
+            <button ng-click="datC.deleteNode(data)" ng-show="data.nodes.length > 0">Delete Node</button>
+
+            <ul ng-show="data.show">
+                <li ng-repeat="data in data.nodes" ng-include="'repeatTreeData'"></li>
+            </ul>
+        </script>
+
+        <ul>
+            <li ng-repeat="data in datC.tree" ng-include="'repeatTreeData'"></li>
+        </ul>
+    </form>
+</div>
+
+<div>
+    <div ng-switch on="datC.loginData">
+        <div ng-switch-when="false">
+            <button ng-click="datC.login()">Login</button>
+        </div>
+        <div ng-switch-when="true">
+            <button ng-click="datC.logout()">Logout</button>
+        </div>
+    </div>
+</div>

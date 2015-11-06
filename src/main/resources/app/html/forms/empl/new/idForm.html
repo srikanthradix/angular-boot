@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="form-container">
+
+    <div class="css-form">
+
+        <div class="form-group">
+            <label for="id">Employee Id</label>
+            <input type="text" ng-model="nefC.emp.id" name="id" required="" emp-avail
+                   ng-model-options="{updateOn : 'blur'}"/>
+
+            <div ng-show="form.$submitted || form.id.$touched">
+                <span ng-show="form.id.$error.required">Enter employee id</span>
+            </div>
+            <div ng-show="form.id.$error.empAvail">This employee id is already taken!</div>
+        </div>
+
+        <div>
+            <a ui-sref="home.new_emp.profile" class="btn btn-info" ng-disabled="form.$invalid" ng-click="nefC.next(emp)">
+                Next<span class="glyphicon glyphicon-circle-arrow-right"></span>
+            </a>
+        </div>
+
+        <br/> <br/>
+    </div>
+</div>
+
+<br/>
+</body>
+</html>

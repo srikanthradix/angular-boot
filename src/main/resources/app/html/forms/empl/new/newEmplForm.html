@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div id="form-container">
+
+            <div class="page-header text-center">
+                <h2>New Employee Form</h2>
+
+                <div id="status-buttons">
+                    <a ui-sref-active="active" ui-sref=".id">ID</a>
+                    <a ui-sref-active="active" ui-sref=".profile">Profile</a>
+                </div>
+            </div>
+
+            <!-- SHOW ERROR/SUCCESS MESSAGES -->
+            <div id="messages">{{ view2a.message }}</div>
+
+            <form name="form" id="signup-form" novalidate class="form-css" ng-submit="nefC.save(emp)">
+                <div ui-view></div>
+            </form>
+
+            <br/> <br/>
+        </div>
+    </div>
+</div>
+
+<br/>
+</body>
+</html>

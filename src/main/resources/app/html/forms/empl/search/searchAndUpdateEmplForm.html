@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div id="form-container" style="margin-top: 0 !important; margin-bottom: 0 !important;">
+
+            <div class="page-header text-center" style="margin-top: 0 !important; margin-bottom: 0 !important;">
+                <div id="status-buttons">
+                    <a ui-sref=".search">Search</a>
+                    <a ui-sref=".update">Update</a>
+                </div>
+            </div>
+
+            <!-- SHOW ERROR/SUCCESS MESSAGES -->
+            <div id="messages">{{ view2b.message }}</div>
+
+            <br/>
+            <div ui-view></div>
+            <br/> <br/>
+        </div>
+    </div>
+</div>
+<br/>
+</body>
+</html>

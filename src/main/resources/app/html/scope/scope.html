@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Scopes</title>
+</head>
+<body>
+
+    <b>Isolated scopes: '&, @ =' </b><br/>
+
+    <!-- <phone dial="callHome('called home')"></phone> -->
+    
+    <phone dial="callHome(sendmsg)"></phone>
+
+    <drink flavor="strawberry"></drink>
+
+    <input type="text" ng-model="ctrlFlavor"><br/>
+
+    <drink-ctrl-flavor flavor="ctrlFlavor"></drink-ctrl-flavor>
+
+    <b>Usage of containers</b><br/>
+    <panel title="Title for Clock">
+        <clock timezone="EST"></clock>
+        <clock timezone="CST"></clock>
+        <clock timezone="MST"></clock>
+        <clock timezone="PST"></clock>
+    </panel>
+
+    <tasks-with-transclude tasks="tasks">
+        <div ng-repeat="task in tasks track by $index">
+            <strong>{{task.title1}}</strong>
+        </div>
+    </tasks-with-transclude>
+    
+   	<div contenteditable="true" ng-model="content1" title="Click to Edit">Some content here..</div>
+    <pre>model1 = {{ content1 }}</pre>
+    
+</body>
+</html>

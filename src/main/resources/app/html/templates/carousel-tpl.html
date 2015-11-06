@@ -1,0 +1,8 @@
+<uib-carousel interval="crslC.myInterval" no-wrap="crslC.noWrapSlides">
+    <uib-slide ng-repeat="slide in crslC.slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+        <div class="carousel-caption">
+            <h4>Slide {{$index}}</h4>
+        </div>
+    </uib-slide>
+</uib-carousel>

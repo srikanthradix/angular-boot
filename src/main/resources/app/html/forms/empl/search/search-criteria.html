@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form>
+    <input type="search" ng-model="srchC.dept" ng-change="srchC.search(srchC.dept)" class="form-input"
+           required="" autofocus placeholder="Search Department...">
+    <button type="button" ng-click="srchC.download()"
+            class="btn btn-info float-right">
+        Download <span class="glyphicon glyphicon-download-alt"></span>
+    </button>
+</form>
+<br/> <br/>
+    <span class="my-span"> Displaying Number of Entries :
+        <input type="number" ng-model="srchC.emps.length" max="99999" min="0">
+    </span>
+
+</body>
+</html>
