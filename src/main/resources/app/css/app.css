@@ -219,3 +219,8 @@ tr:nth-child(even) {
     border-collapse: collapse;
     width: 100%;
 }
+
+tr.d0 td {
+    background-color: #CC9999 !important;
+    color: black !important;
+}

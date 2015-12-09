@@ -6,14 +6,34 @@
 </head>
 <body>
 
+<script type="text/ng-template" id="display">
+    <td>{{emp.id}}</td>
+    <td>{{emp.name}}</td>
+    <td>{{emp.salary}}</td>
+    <td>{{emp.department.name}}</td>
+    <td>
+        <button ng-click="srchC.editEmployee(emp)">Edit</button>
+    </td>
+</script>
+<script type="text/ng-template" id="edit">
+    <td><input type="text" ng-model="srchC.selected.id" /></td>
+    <td><input type="text" ng-model="srchC.selected.name" /></td>
+    <td><input type="text" ng-model="srchC.selected.salary" /></td>
+    <td><input type="text" ng-model="srchC.selected.department.name" /></td>
+    <td>
+        <button ng-click="srchC.updateEmployee()">Save</button>
+        <button ng-click="srchC.cancelEdit()">Cancel</button>
+    </td>
+</script>
+
 <div>
     <div id="table-wrapper">
         <div id="table-scroll">
             <table id="searchResults" class="table table-bordered table-striped my-table">
                 <thead>
                 <tr>
-                    <td><input type="checkbox" ng-model="srchC.selectedAll" ng-click="srchC.selectAll()">
-                    </th>
+                    <!--<td><input type="checkbox" ng-model="srchC.selectedAll" ng-click="srchC.selectAll()">-->
+                    <!--</th>-->
                     <td>Id
                     </th>
                     <td>Name
@@ -27,21 +47,17 @@
                     </th>
                 </tr>
                 </thead>
-                <tr ng-repeat="emp in srchC.emps | orderBy : srchC.predicate : srchC.reverse">
-                <!--<tr dir-paginate="emp in srchC.emps | orderBy : srchC.predicate : srchC.reverse | itemsPerPage: srchC.itemsPerPage">-->
-                    <td><input type="checkbox" ng-model="srchC.selectedAll" ng-click="srchC.selectAll()">
-                    <td>{{emp.id}}</td>
-                    <!--<td editable-field="emp.name"></td>-->
-                    <td>{{emp.name}}</td>
-                    <td>{{emp.salary}}</td>
-                    <td>{{emp.department.name}}</td>
+                <!--<tr ng-repeat="emp in srchC.emps | orderBy : srchC.predicate : srchC.reverse" ng-include="srchC.getTemplate(emp)">-->
+                <tr dir-paginate="emp in srchC.emps | orderBy : srchC.predicate : srchC.reverse | itemsPerPage: srchC.itemsPerPage"
+                    ng-include="srchC.getTemplate(emp)"
+                    ng-class="{'d0': emp.updated}">>
                 </tr>
             </table>
         </div>
     </div>
     <br/>
-    <!--<dir-pagination-controls class="centered" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"-->
-                             <!--template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
+    <dir-pagination-controls class="centered" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                             template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
 
 </div>
 <br/>

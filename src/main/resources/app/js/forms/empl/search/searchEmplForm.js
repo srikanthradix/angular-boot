@@ -37,20 +37,26 @@
             $urlRouterProvider.otherwise('/');
         }])
 
-        .controller('searchEmplCtrl', ['$state', 'srchFormService',
-            function ($state, srchFormService) {
+        .controller('searchEmplCtrl', ['$state', '$scope', 'srchFormService',
+            function ($state, $scope, srchFormService) {
                 var self = this;
                 self.emps = [];
-                self.selectedEmp = {};
-                self.view2b = self.view2b || {};
+                self.selected = {};
+
                 self.itemsPerPage = srchFormService.getItemsPerPage();
                 self.predicate = srchFormService.getPredicate();
                 self.reverse = srchFormService.getReverse();
 
-                self.setSelectedEmployee = function () {
-                    self.selectedEmp = srchFormService.setSelectedEmployee();
+                self.cancelEdit = function() {
+                    self.selected = srchFormService.cancelEdit();
                 }
 
+                self.getTemplate = function (emp) {
+                    return srchFormService.getTemplate(emp);
+                }
+                self.editEmployee = function (emp) {
+                    self.selected = srchFormService.editEmployee(emp);
+                }
                 self.order = function (predicate) {
                     srchFormService.order(predicate);
                     self.predicate = srchFormService.getPredicate();
@@ -64,15 +70,11 @@
                     self.emps = srchFormService.search(dept);
                 }
                 self.updateEmployee = function () {
-                    self.emps = srchFormService.updateEmployee();
+                    self.emps = srchFormService.updateEmployee(self.selected);
+                    self.selected = {};
                 }
-                self.removeEmployee = function () {
-                    self.emps = srchFormService.removeEmployee();
-                }
-                self.download = srchFormService.download;
                 self.reset = srchFormService.reset;
 
-                //self.reset();
             }])
 
         // Inline edit directive
@@ -98,7 +100,6 @@
                         }
                         console.log('model updated');
                     });
-                    //editCtrl.someCtrlFn({value: editCtrl.model});
                 };
                 editCtrl.cancel = function () {
                     editCtrl.editMode = false;
@@ -120,8 +121,6 @@
             };
         })
 
-        //angular.module('myApp.bootstrap')
-        //    .getProvider()
         .service('deptService', ['$resource', function ($resource) {
             return $resource('/dept/:dept', {dept: '@_dept'}, {
                 update: {
@@ -130,11 +129,8 @@
             });
         }])
 
-        //angular.module('myApp.bootstrap')
-        //    .getProvider()
         .service('srchFormService', ['$state', 'deptService', function ($state, deptService) {
             var self = this;
-            self.master = {};
             self.itemsPerPage = 5;
             self.emps = []
             self.selectedEmp = {};
@@ -142,16 +138,25 @@
             self.predicate = 'salary';
             self.reverse = true;
 
+            self.getTemplate = function (emp) {
+                if(self.selectedEmp.id && emp && emp.id === self.selectedEmp.id)  {
+                    return 'edit';
+                } else {
+                    return 'display';
+                }
+            };
+
+            self.cancelEdit = function () {
+                self.clearSelected();
+                return self.selectedEmp;
+            };
+
             self.setItemsPerPage = function (itemsPerPage) {
                 self.itemsPerPage = itemsPerPage;
             }
 
-            self.setSelectedEmployee = function () {
-                angular.forEach(self.emps, function (emp) {
-                    if (emp.selected === true) {
-                        self.selectedEmp = emp;
-                    }
-                })
+            self.editEmployee = function (emp) {
+                self.selectedEmp = angular.copy(emp);
                 return self.selectedEmp;
             }
 
@@ -181,7 +186,18 @@
                 return self.emps;
             }
 
-            self.updateEmployee = function () {
+            self.updateEmployee = function (emp) {
+                angular.forEach(self.emps, function (employee, idx) {
+                    if(emp.id === employee.id) {
+                        emp.updated = true;
+                        self.emps[idx] = emp;
+                        self.clearSelected();
+                    }
+                });
+                return self.emps;
+            }
+
+            self.saveEmployees = function () {
                 deptService.update({dept: self.selectedEmp})
                     .$promise
                     .then(function (data) {
@@ -227,6 +243,9 @@
                     target: '_blank',
                     download: 'employees.csv'
                 })[0].click();
+            };
+            self.clearSelected = function () {
+                self.selectedEmp = {};
             };
 
             self.reset = function () {
