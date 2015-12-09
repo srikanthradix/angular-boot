@@ -12,17 +12,19 @@
     <td>{{emp.salary}}</td>
     <td>{{emp.department.name}}</td>
     <td>
-        <button ng-click="srchC.editEmployee(emp)">Edit</button>
+        <button ng-click="srchC.editEmployee(emp)"><span class="glyphicon glyphicon-edit">Edit</span></button>
+        <button ng-click="srchC.deleteEmployee(emp)"><span class="glyphicon glyphicon-remove-sign">Remove</span>
+        </button>
     </td>
 </script>
 <script type="text/ng-template" id="edit">
-    <td><input type="text" ng-model="srchC.selected.id" /></td>
-    <td><input type="text" ng-model="srchC.selected.name" /></td>
-    <td><input type="text" ng-model="srchC.selected.salary" /></td>
-    <td><input type="text" ng-model="srchC.selected.department.name" /></td>
+    <td><input type="text" ng-model="srchC.selected.id"/></td>
+    <td><input type="text" ng-model="srchC.selected.name"/></td>
+    <td><input type="text" ng-model="srchC.selected.salary"/></td>
+    <td><input type="text" ng-model="srchC.selected.department.name"/></td>
     <td>
-        <button ng-click="srchC.updateEmployee()">Save</button>
-        <button ng-click="srchC.cancelEdit()">Cancel</button>
+        <button ng-click="srchC.updateEmployee()"><span class="glyphicon glyphicon-ok">Update</span></button>
+        <button ng-click="srchC.cancelEdit()"><span class="glyphicon glyphicon-remove">Cancel</span></button>
     </td>
 </script>
 
@@ -32,8 +34,6 @@
             <table id="searchResults" class="table table-bordered table-striped my-table">
                 <thead>
                 <tr>
-                    <!--<td><input type="checkbox" ng-model="srchC.selectedAll" ng-click="srchC.selectAll()">-->
-                    <!--</th>-->
                     <td>Id
                     </th>
                     <td>Name

@@ -57,6 +57,9 @@
                 self.editEmployee = function (emp) {
                     self.selected = srchFormService.editEmployee(emp);
                 }
+                self.deleteEmployee = function(emp) {
+                    self.emps = srchFormService.deleteEmployee(emp);
+                }
                 self.order = function (predicate) {
                     srchFormService.order(predicate);
                     self.predicate = srchFormService.getPredicate();
@@ -212,14 +215,12 @@
                     });
             }
 
-            self.removeEmployee = function () {
-                var activeEmps = [];
-                angular.forEach(self.emps, function (emp) {
-                    if (emp.selected === false) {
-                        activeEmps.push(emp);
+            self.deleteEmployee = function (emp) {
+                angular.forEach(self.emps, function (employee, idx) {
+                    if (emp.id === employee.id) {
+                        self.emps.splice(idx, 1);
                     }
                 })
-                self.emps = activeEmps;
                 return self.emps;
             }
 
