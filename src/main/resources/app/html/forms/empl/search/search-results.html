@@ -18,9 +18,9 @@
     </td>
 </script>
 <script type="text/ng-template" id="edit">
-    <td><input type="text" ng-model="srchC.selected.id"/></td>
+    <td>{{emp.id}}</td>
     <td><input type="text" ng-model="srchC.selected.name"/></td>
-    <td><input type="text" ng-model="srchC.selected.salary"/></td>
+    <td><input type="number" ng-model="srchC.selected.salary"/></td>
     <td><input type="text" ng-model="srchC.selected.department.name"/></td>
     <td>
         <button ng-click="srchC.updateEmployee()"><span class="glyphicon glyphicon-ok">Update</span></button>
@@ -34,23 +34,22 @@
             <table id="searchResults" class="table table-bordered table-striped my-table">
                 <thead>
                 <tr>
-                    <td>Id
+                    <td>Id</td>
                     </th>
-                    <td>Name
+                    <td>Name</td>
                     </th>
                     <td><a href="" ng-click="srchC.order('salary')">Salary</a>
-                <span class="sortorder" ng-show="srchC.predicate === 'salary'"
-                      ng-class="{reverse:srchC.reverse}"></span>
+                      <span class="sortorder" ng-show="srchC.predicate === 'salary'" ng-class="{reverse:srchC.reverse}"></span></td>
                     </th>
                     </th>
                     <td>Department</td>
                     </th>
                 </tr>
                 </thead>
-                <!--<tr ng-repeat="emp in srchC.emps | orderBy : srchC.predicate : srchC.reverse" ng-include="srchC.getTemplate(emp)">-->
+                <!--<tr ng-repeat="emp in srchC.emps | orderBy : srchC.predicate : srchC.reverse"-->
                 <tr dir-paginate="emp in srchC.emps | orderBy : srchC.predicate : srchC.reverse | itemsPerPage: srchC.itemsPerPage"
-                    ng-include="srchC.getTemplate(emp)"
-                    ng-class="{'d0': emp.updated}">>
+                    ng-include='srchC.getTemplate(emp)'
+                    ng-class="{'d0': emp.updated}">
                 </tr>
             </table>
         </div>

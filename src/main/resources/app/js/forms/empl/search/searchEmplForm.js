@@ -139,7 +139,7 @@
             self.selectedEmp = {};
             self.view2b = self.view2b || {};
             self.predicate = 'salary';
-            self.reverse = true;
+            self.reverse = false;
 
             self.getTemplate = function (emp) {
                 if(self.selectedEmp.id && emp && emp.id === self.selectedEmp.id)  {
@@ -225,8 +225,12 @@
             }
 
             self.order = function (predicate) {
-                self.reverse = (self.predicate === predicate) ? !self.reverse : false;
-                self.predicate = predicate;
+                if(self.predicate === predicate) {
+                    self.reverse = !self.reverse;
+                } else {
+                    self.reverse = false;
+                    self.predicate = predicate;
+                }
             }
 
             self.download = function () {
